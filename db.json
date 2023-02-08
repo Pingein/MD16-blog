@@ -1,0 +1,64 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "image_url": "https://picsum.photos/id/69/1200/600",
+      "title": "Blog Title 1 is a very long blog title",
+      "excerpt": "in this blog i will be talking about long blog titles , and why you shouldnt use them",
+      "content": "this is a blog about blog in a blog that is a blog a blog in blog very very long",
+      "comments": [
+        {
+          "id": 1,
+          "commentator_image_url": "https://picsum.photos/id/135/200",
+          "commentator_name": "b.o.",
+          "comment": "okay"
+        },
+        {
+          "id": 3,
+          "commentator_image_url": "https://picsum.photos/id/87/200",
+          "commentator_name": "chief keef",
+          "comment": "sosa"
+        },
+        {
+          "id": 4,
+          "commentator_image_url": "https://picsum.photos/id/52/200",
+          "commentator_name": "tony hawk",
+          "comment": "hi im tony hawk from skateboarding"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "image_url": "https://picsum.photos/id/68/1200/600",
+      "title": "Blog Title 2",
+      "excerpt": "Life is a journey filled with ups and downs, twists and turns, and a multitude of experiences that shape who we are and who we will become. It is important to embrace each moment, good or bad, and use them as opportunities to grow and learn.",
+      "content": "the bee move was okay",
+      "comments": [
+        {
+          "id": 2,
+          "commentator_image_url": "https://picsum.photos/id/57/200",
+          "commentator_name": "xd",
+          "comment": "keep that to yourself"
+        },
+        {
+          "id": 3,
+          "commentator_image_url": "https://picsum.photos/id/87/200",
+          "commentator_name": "chief keef",
+          "comment": "sosa"
+        },
+        {
+          "id": 4,
+          "commentator_image_url": "https://picsum.photos/id/52/200",
+          "commentator_name": "tony hawk",
+          "comment": "hi im tony hawk from skateboarding"
+        },
+        {
+          "id": 699008,
+          "comment": "wow didnt no you was chill like dat",
+          "commentator_image_url": "https://picsum.photos/id/123/200",
+          "commentator_name": "barry o."
+        }
+      ]
+    }
+  ]
+}

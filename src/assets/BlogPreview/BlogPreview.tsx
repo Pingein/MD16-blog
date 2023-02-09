@@ -18,8 +18,7 @@ const BlogPreview = ({id, title, image, excerpt}:BlogPreviewParams) => {
                         alt={title}
                         className={styles.image} />
                 <div className={styles.textContainer}>
-                    <h1 className={styles.title}>{title}</h1>
-                    
+                    <h1 className={styles.title}>{title}</h1>      
                 </div>
                 <p className={styles.excerpt}>{excerpt}</p>
             </div>

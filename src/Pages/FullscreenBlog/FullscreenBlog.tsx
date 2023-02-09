@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import CommentField, { AddCommentField } from '../../assets/CommentField/CommentField'
 import { generateId, randInt } from '../../assets/helper'
 import { Comment, BlogData } from '../../assets/types'
@@ -11,6 +11,8 @@ import styles from './FullscreenBlog.module.scss'
 
 const FullscreenBlog = () => {
     const {blogId} = useParams()
+
+    const [redirectCountdown, setredirectCountdown] = useState(5)
 
     const navigate = useNavigate()
 
@@ -30,7 +32,19 @@ const FullscreenBlog = () => {
         return <h1>Loading...</h1>
     }
     if (blogQuery.isError) {
-        return navigate('..')
+        setInterval(() => {
+            setredirectCountdown(redirectCountdown - 1)
+        }, 1000)
+        setTimeout(() => {
+            navigate('..')
+        }, 5000)
+
+        return (
+            <h1>
+                An error occured, redirecting to <Link to='..' className={styles.link}>blogs</Link> 
+                page in {redirectCountdown} seconds
+                </h1> 
+        )
     }
 
 

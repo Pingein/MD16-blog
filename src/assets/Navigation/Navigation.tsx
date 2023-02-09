@@ -1,38 +1,35 @@
 import styles from './Navigation.module.scss'
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
-interface NavLink {
+interface NavigationLink {
     to: string
     text: string
 }
 
 interface NavigationParams {
-    links: NavLink[]
+    links: NavigationLink[]
 }
 
 
-let links:NavLink[] = [{to:'../', text:'Home'},
-                       {to:'../blog', text:'Blog'}]
+let links:NavigationLink[] = [{to:'../', text:'Home'},
+                              {to:'../blog', text:'Blog'}]
 
 const Navigation = ({links}:NavigationParams) => {
     return (
         <div className={styles.navBar}>
-            <ul className={styles.nav}>
+            <ul className={styles.navList}>
                 {links.map(link => {
                     return (
-                        <li key={link.text} className={styles.navItem}>
-                            <Link className={styles.navText} 
-                                to={link.to}>
-                                {link.text}
-                            </Link>
-                        </li>
+                        <NavLink key={link.text} className={styles.navText} to={link.to}> 
+                            {link.text}
+                        </NavLink>
                     )
                 })}
             </ul>
-            <button className={styles.addPostBtn}>
-                <Link to='../blog/write' className={styles.link}>Add Post</Link> 
-            </button>
+            <Link to='../blog/write' className={`${styles.addPostBtn} ${styles.navText}`}>
+                Add Post
+            </Link> 
         </div>
     )
 }

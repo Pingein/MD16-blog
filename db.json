@@ -101,7 +101,14 @@
       "title": "csgo",
       "excerpt": "1.6",
       "content": "bruh",
-      "comments": [],
+      "comments": [
+        {
+          "id": 949067,
+          "comment": "very good gameg",
+          "commentator_image_url": "https://picsum.photos/id/457/200",
+          "commentator_name": "gamer"
+        }
+      ],
       "id": 5
     }
   ]

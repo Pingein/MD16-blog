@@ -8,9 +8,9 @@ interface HomeParams {
 
 const Home = ({}:HomeParams) => {
     return (
-        <div>
+        <section>
             
-        </div>
+        </section>
     )
 }
 

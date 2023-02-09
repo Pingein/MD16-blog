@@ -9,7 +9,7 @@ import Navigation, { links } from './assets/Navigation/Navigation';
 import Home from './Pages/Home/Home';
 import Blog from './Pages/Blog/Blog';
 import FullscreenBlog from './Pages/FullscreenBlog/FullscreenBlog';
-import BlogWriter from './Pages/BlogWriter/BlogWriter';
+import { BlogWriter } from './Pages/FullscreenBlog/FullscreenBlog';
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 

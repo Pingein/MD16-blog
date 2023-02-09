@@ -31,7 +31,7 @@ const Navigation = ({links}:NavigationParams) => {
                 })}
             </ul>
             <button className={styles.addPostBtn}>
-                <Link to='../blog/write'>Add Post</Link> 
+                <Link to='../blog/write' className={styles.link}>Add Post</Link> 
             </button>
         </div>
     )

@@ -31,7 +31,7 @@
       "id": 2,
       "image_url": "https://picsum.photos/id/68/1200/600",
       "title": "Blog Title 2",
-      "excerpt": "Life is a journey filled with ups and downs, twists and turns, and a multitude of experiences that shape who we are and who we will become. It is important to embrace each moment, good or bad, and use them as opportunities to grow and learn.",
+      "excerpt": "Life is a journey filled with ups and downs, twists and turns, and a multitude of experiences that shape who we are and who we will become.",
       "content": "the bee move was okay",
       "comments": [
         {
@@ -59,6 +59,50 @@
           "commentator_name": "barry o."
         }
       ]
+    },
+    {
+      "image_url": "https://www.aorus.com/upload/Product/F_20201230135856TD1TZv.JPG",
+      "title": "test blog 1",
+      "excerpt": "this is a test blog",
+      "content": "first test blog",
+      "comments": [
+        {
+          "id": 396922,
+          "comment": "test blog first comment",
+          "commentator_image_url": "https://picsum.photos/id/405/200",
+          "commentator_name": "commenter"
+        },
+        {
+          "id": 93918,
+          "comment": "adding another comment",
+          "commentator_image_url": "https://picsum.photos/id/57/200",
+          "commentator_name": "another comment"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "image_url": "https://s.namemc.com/3d/skin/body.png?id=89e7f3b67d172890&model=classic&width=317&height=317",
+      "title": "steve sideways",
+      "excerpt": "they made steve sideways",
+      "content": "why did the ydo that",
+      "comments": [
+        {
+          "id": 394585,
+          "comment": "i wish i knew",
+          "commentator_image_url": "https://picsum.photos/id/451/200",
+          "commentator_name": "what???"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "image_url": "https://cdn.akamai.steamstatic.com/steam/apps/730/capsule_616x353.jpg?t=1641233427",
+      "title": "csgo",
+      "excerpt": "1.6",
+      "content": "bruh",
+      "comments": [],
+      "id": 5
     }
   ]
 }

@@ -54,16 +54,11 @@ const AddCommentField = ({commentator_image_url, commentator_name, onSubmit}:Com
             </div>
             <div className={styles.commentFieldContainer}>
                 <div className={styles.commentatorNameContainer}>
-                    {/* <h3 className={styles.commentatorName}>
-                        {commentator_name}
-                    </h3> */}
                     <input type="text" 
                            className={styles.commentatorName}
                            placeholder='Your name'/>
                 </div>
                 <div className={styles.textContainer}>
-                    {/* <input className={styles.comment}
-                           placeholder='Enter comment'/> */}
                     <textarea className={styles.commentText}
                            placeholder='Enter comment'></textarea>
                     <button className={styles.postBtn}>Post</button>

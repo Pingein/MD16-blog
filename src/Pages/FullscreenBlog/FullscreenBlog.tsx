@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import CommentField, { AddCommentField } from '../../assets/CommentField/CommentField'
 import { generateId, randInt } from '../../assets/helper'
 import { Comment, BlogData } from '../../assets/types'
@@ -12,13 +12,15 @@ import styles from './FullscreenBlog.module.scss'
 const FullscreenBlog = () => {
     const {blogId} = useParams()
 
+    const navigate = useNavigate()
+
     const blogQuery = useQuery({
         queryKey: [`blog${blogId}`],
         queryFn: () => axios.get(`http://localhost:3000/blogs/${blogId}`)
                             .then(({data}) => data as BlogData),
     })
 
-    const blogMutation = useMutation({
+    const singleBlogMutation = useMutation({
         mutationFn: (updatedBlog:BlogData) => axios.patch(`http://localhost:3000/blogs/${blogId}`, updatedBlog),
         onSuccess: () => queryClient.invalidateQueries([`blog${blogId}`])
     })
@@ -28,7 +30,7 @@ const FullscreenBlog = () => {
         return <h1>Loading...</h1>
     }
     if (blogQuery.isError) {
-        return <h1>Error</h1>
+        return navigate('..')
     }
 
 
@@ -60,7 +62,7 @@ const FullscreenBlog = () => {
                                     let newCommentNameEl = (e.currentTarget.childNodes[1].childNodes[0].childNodes[0] as HTMLInputElement)
 
                                     if (newCommentEl.value && newCommentNameEl.value) {
-                                        blogMutation.mutate({
+                                        singleBlogMutation.mutate({
                                             ...blogQuery.data,
                                             comments: [...comments, {
                                                 id: generateId(),
@@ -75,13 +77,14 @@ const FullscreenBlog = () => {
 
                 <span>Comments ({comments.length})</span>
                 {comments.map(comment => {
-                    return <CommentField commentator_image_url={comment.commentator_image_url}
+                    return <CommentField key={comment.id}
+                                         commentator_image_url={comment.commentator_image_url}
                                          commentator_name={comment.commentator_name}
                                          comment={comment.comment}
 
                                          deleteHandler={() => {
                                             if (confirm(`this will delete comment '${comment.comment}' by '${comment.commentator_name}'`)) {
-                                                blogMutation.mutate({
+                                                singleBlogMutation.mutate({
                                                     ...blogQuery.data,
                                                     comments: comments.filter(existingComment => existingComment.id != comment.id)
                                                 })
@@ -91,7 +94,7 @@ const FullscreenBlog = () => {
                                          editHandler={() => {
                                             let editedComment = prompt('enter new comment', comment.comment)
                                             if (editedComment) {
-                                                blogMutation.mutate({
+                                                singleBlogMutation.mutate({
                                                     ...blogQuery.data,
                                                     comments: comments.map(existingComment => {
                                                         return (existingComment.id == comment.id 
@@ -107,5 +110,91 @@ const FullscreenBlog = () => {
     )
 }
 
+
+const BlogWriter = () => {
+    const [blogImage, setBlogImage] = useState('')
+
+    const imageRef = useRef<HTMLImageElement>(null)
+    const titleRef = useRef<HTMLInputElement>(null)
+    const excerptRef = useRef<HTMLInputElement>(null)
+    const contentRef = useRef<HTMLTextAreaElement>(null)
+
+    const navigate = useNavigate()
+
+    const blogsMutation = useMutation({
+        mutationFn: (newBlog:BlogData) => axios.post(`http://localhost:3000/blogs/`, newBlog),
+        onSuccess: () => queryClient.invalidateQueries([`blogs`])
+    })
+
+
+    return (
+        <section className={styles.fullscreenBlog}>
+            <div className={styles.blog}>
+                <div className={styles.imageContainer}>
+                    {blogImage 
+                    ? <img src={blogImage} className={styles.image} ref={imageRef}></img> 
+                    : <form className={styles.blogContent} 
+                            onSubmit={(e) => {
+                                e.preventDefault()
+                                let link = (e.currentTarget.childNodes[0] as HTMLInputElement).value
+                                if (link.match(RegExp(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/))) {
+                                    setBlogImage(link)
+                                } else {
+                                    alert('please enter valid url')
+                                }
+                            }}>
+                        <input type='text' 
+                               placeholder='Paste image link'
+                               className={styles.input}/>
+                        <button className={styles.btn}>
+                            submit
+                        </button>
+                      </form>}
+                </div>
+                <form className={styles.blogContent}
+                      onSubmit={(e) => {
+                        e.preventDefault()
+                        let image_url = imageRef.current?.src
+                        let title = titleRef.current?.value
+                        let excerpt = excerptRef.current?.value
+                        let content = contentRef.current?.value
+
+                        if (image_url && title && excerpt && content) {
+                            console.log('posting')
+                            blogsMutation.mutate({
+                                image_url,
+                                title,
+                                excerpt,
+                                content,
+                                comments: []
+                            })
+                            navigate('/blog')
+                        }
+                      }}>
+                    <input type="text" 
+                           placeholder='Enter blog title'
+                           className={styles.input}
+                           ref={titleRef}/>
+                    <input type="text" 
+                           placeholder='Enter blog excerpt'
+                           className={styles.input}
+                           ref={excerptRef}/>      
+                    <textarea placeholder='Enter blog text'
+                              className={styles.input}
+                              ref={contentRef}>
+                    </textarea>
+
+                    <button className={styles.btn}>
+                        Post
+                    </button>
+                </form>
+            </div>
+            
+        </section>
+    )
+}
+
+
+export { BlogWriter }
 
 export default FullscreenBlog

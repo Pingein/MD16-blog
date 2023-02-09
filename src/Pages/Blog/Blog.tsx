@@ -32,7 +32,8 @@ const Blog = ({}:BlogParams) => {
             <div className={styles.blogEntries}>
 
                 {blogQuery.data.map(data => {
-                    return <BlogPreview id={data.id}
+                    return <BlogPreview key={data.id}
+                                        id={data.id}
                                         title={data.title}
                                         image={data.image_url}
                                         excerpt={data.excerpt}/>
